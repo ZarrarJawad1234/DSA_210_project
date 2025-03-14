@@ -3,19 +3,65 @@ Zarrar Jawad
 
 35027
 
-Motivation
-ECG analysis is a key tool for catching cardiac issues early, and I want to use data science to make it even better—potentially helping doctors spot problems faster and save lives. This project will explore how ECG signal patterns, paired with patient details like age, can help tell apart normal heartbeats from defective ones. I’ll be working with public ECG datasets and adding demographic info to dig into patterns, like whether age plays a role in heart issues. I actually tried a similar project before but didn’t get far, so I’m really motivated to make it work this time with the skills I’m learning in DSA 210.
+# DSA 210 Project
+**Zarrar Jawad**  
+**35027**  
 
-Data Sources
-I’ll be pulling my data from PhysioNet, a go-to place for medical research datasets. My main source will be the PTB Diagnostic ECG Database and the ECG 5000, which has over 14,000 ECG recordings from 290 people, labeled as normal or showing issues like heart attacks or irregular rhythms. It also comes with patient info like age and gender, which I’ll use to enrich my analysis. For a backup and to cross-check my findings, I’ll also grab some data from the MIT-BIH Arrhythmia Database, which has 48 half-hour ECG recordings with detailed beat-by-beat labels. Both datasets are available on PhysioNet, and I’ll focus on the ECG signals and patient demographics to see how they tie into heart conditions.
+## Motivation
+Electrocardiogram (ECG) analysis is a critical tool for identifying cardiac abnormalities early, potentially saving lives through timely diagnosis and treatment. This project aims to enhance ECG analysis using data science, focusing on distinguishing normal heartbeats from defective ones by incorporating both ECG signal patterns and patient demographic information. By integrating age, gender, and clinical details, the goal is to uncover patterns that could improve diagnostic accuracy and provide deeper insights into cardiovascular health.
 
-Data Collection Plan
-Here’s how I’ll get my data ready: I’ll start by downloading the PTB Diagnostic ECG Database from PhysioNet (https://physionet.org/content/ptbdb/1.0.0/) on March 11, 2025. The files come in a special WFDB format, with signal data and headers that include things like sampling rate and labels. I’ll use the wfdb-python package in Python to convert these into a CSV file called ecg_data.csv by March 15. I’ll focus on the first 10 seconds of each recording—about 5,000 samples at 500 Hz—and stick to lead I for consistency, labeling each as “Normal” or “Defective” based on the diagnosis.
+Previously, I attempted a similar project but encountered challenges in data handling and analysis. However, with my evolving skills in DSA 210, I am now better equipped to tackle these obstacles and develop a more refined approach.
 
-For the demographic info, I’ll pull age, gender, and any clinical notes from the PTB metadata files, also on PhysioNet. I’ll write a script (extract_metadata.py) to turn this into a demographics.csv file by March 12, making sure ages are numbers (like 65 instead of “65 years”) and gender is either M or F. If some ages are missing, I’ll use the average age from the dataset, which is around 55.
+## Data Sources
+The primary datasets for this project come from PhysioNet, a widely used resource for medical research data. The main sources include:
 
-To double-check my work I’ll use wfdb-python again to convert a small subset into mitbih_data.csv, picking out 5,000 beats to compare with my main dataset. Then, I’ll merge everything into a single master_ecg_data.csv file using pandas, matching ECG records with their demographic info by patient ID and dropping any incomplete rows. I’ll make sure the signals are clean by filtering out weird outliers, like values way off the charts, and I’ll check the labels against PhysioNet’s documentation to avoid mistakes. All my files will go into a /data folder in my GitHub repo, and I’ll commit my progress daily from March 11 to 15.
+- **PTB Diagnostic ECG Database**: This dataset contains detailed ECG recordings from 290 patients, categorized as normal or showing various heart conditions, such as myocardial infarctions and arrhythmias. It also includes demographic details like age and gender, making it an excellent source for combining signal analysis with patient characteristics.
+- **ECG 5000 Dataset**: Comprising over 14,000 ECG samples, this dataset provides a robust collection of labeled ECG readings, helping to strengthen the classification of normal vs. defective heartbeats.
+- **MIT-BIH Arrhythmia Database**: Used for cross-validation, this dataset consists of 48 half-hour ECG recordings with detailed beat-by-beat annotations, adding an extra layer of verification to my analysis.
 
-Tools:
+These datasets will allow for a thorough examination of ECG signals in relation to patient demographics, potentially revealing trends in how different factors influence heart conditions.
 
-I’ll stick with Python 3.11 for the whole project, using pandas to wrangle the data, wfdb-python to handle PhysioNet files, scikit-learn for the machine learning part, and matplotlib for creating those cool visualizations. My GitHub repo will keep everything organized and ready for submission.
+## Data Collection and Processing Plan
+To ensure high-quality, structured data, I will follow a multi-step approach:
+
+1. **Data Extraction & Conversion**:
+   - Download the PTB Diagnostic ECG Database from PhysioNet.
+   - Use the `wfdb-python` package to convert the WFDB format files into a structured CSV file (`ecg_data.csv`).
+   - Extract the first 5,000 samples per patient at 500 Hz, standardizing by selecting lead I for consistency.
+   - Label each ECG entry as "Normal" or "Defective" based on the dataset’s diagnostic information.
+
+2. **Demographic Data Processing**:
+   - Extract age, gender, and any available clinical notes from the PTB metadata files.
+   - Implement a script (`extract_metadata.py`) to clean and format demographic data into `demographics.csv`.
+   - Ensure numerical age values and standardize gender representation (M/F).
+   - Handle missing ages by imputing the dataset’s average age.
+
+3. **Cross-Validation & Data Integration**:
+   - Convert a subset of the MIT-BIH Arrhythmia Database into `mitbih_data.csv`, selecting 5,000 beats for comparison.
+   - Merge `ecg_data.csv` and `demographics.csv` into a master dataset (`master_ecg_data.csv`), aligning ECG readings with patient information based on patient ID.
+   - Clean the dataset by filtering out anomalies such as extreme outliers and verifying label integrity against PhysioNet documentation.
+
+4. **Data Storage & Version Control**:
+   - Organize all datasets in a `/data` directory within a dedicated GitHub repository.
+   - Commit progress systematically, maintaining clear documentation of data transformations and modifications.
+
+## Tools and Technologies
+To execute this project efficiently, I will leverage:
+
+- **Python 3.11** for data processing and machine learning implementation.
+- **pandas** for data manipulation and merging.
+- **wfdb-python** to handle PhysioNet’s specialized ECG file formats.
+- **scikit-learn** for machine learning-based classification and pattern analysis.
+- **matplotlib & seaborn** for visualizing ECG signals and demographic trends.
+- **Git & GitHub** for version control and project organization.
+
+## Expected Outcomes
+This project will provide a structured pipeline for analyzing ECG signals alongside demographic information, with the potential to:
+
+- Improve classification accuracy of normal vs. defective heartbeats.
+- Identify correlations between patient demographics and heart conditions.
+- Validate findings across multiple datasets to ensure robustness.
+- Generate visual insights that highlight key patterns in ECG signals.
+
+By successfully executing this project, I aim to contribute meaningful insights into ECG analysis, potentially aiding medical professionals in making more informed diagnostic decisions.
+
